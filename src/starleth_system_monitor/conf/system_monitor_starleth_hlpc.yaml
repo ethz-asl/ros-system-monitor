@@ -1,0 +1,25 @@
+cpu_monitor_starleth_hlpc:
+  check_core_temps: true
+  cpu_load_warn:  0.9
+  cpu_load_error: 1.0
+  cpu_load1_warn: 0.9
+  cpu_load5_warn: 0.8
+  cpu_temp_warn: 85.0
+  cpu_temp_error: 90.0
+hdd_monitor_starleth_hlpc:
+  no_hdd_temp: true
+  no_hdd_temp_warn: false
+  hdd_level_warn: 0.95
+  hdd_level_error: 0.99
+  hdd_temp_warn: 55.0
+  hdd_temp_error: 70.0
+mem_monitor_starleth_hlpc:
+  mem_level_warn: 0.95
+  mem_level_error: 0.99
+ntp_monitor_starleth_hlpc:
+  reference_host: localhost
+  offset_tolerance: 500.0
+  error_offset_tolerance: 5000000.0
+net_monitor_starleth_hlpc:
+  net_level_warn: 0.95
+  net_capacity: 128.0

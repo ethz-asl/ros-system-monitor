@@ -1,0 +1,132 @@
+BUILDING WITH CMAKE
+
+CMake  must  be  run to generate a build system for this project.
+The build system may be placed either in the project source  tree
+(an  in-source  build)  or  in a separate binary tree (an out-of-
+source build). We strongly encourage use of out-of-source  builds
+because  they make it easy to have multiple builds with different
+configurations sharing the same source tree. Once  a  single  in-
+source  build has been created it is the only build tree that can
+be associated with that source tree. A source  tree  may  not  be
+used  both for an in-source build and an out-of-source build, but
+any number of out-of-source builds may share a source  tree  that
+does  not  have an in-source build. Having multiple out-of-source
+builds is particularly useful for installing this project on mul-
+tiple  architectures using a single source tree on a shared disk.
+
+CMake provides both a command-line tool  and  interactive  inter-
+faces.  Advanced  users may wish to use the command-line tool but
+here we document the CMake interactive interface for  each  plat-
+form:
+
+* UNIX / Cygwin / Mac OSX
+
+CMake should be run from the command line on these platforms. The
+current working directory should be set  to  the  desired  binary
+tree  location in which the build system should be generated. One
+command-line argument is used to  specify  the  location  of  the
+source  tree. CMake will usually choose the system C and C++ com-
+pilers automatically but it can be told to use specific compilers
+through the "CC" and "CXX" environment variables.
+
+A typical in-source build for this project might look like this:
+
+  $ ls -d PROJECT_DIR
+  PROJECT_DIR/
+  $ cd PROJECT_DIR
+  $ ccmake .
+  $ make
+
+A  typical  out-of-source  build for this project might look like
+this:
+
+  $ ls -d PROJECT_DIR
+  PROJECT_DIR/
+  $ cd PROJECT_DIR
+  $ mkdir build
+  $ cd build
+  $ ccmake ../
+  $ make
+
+In the above example, the call to ccmake may be replaced by
+
+  $ CC=/your/c/compiler CXX=/your/C++/compiler ccmake ../
+
+in  order to tell CMake to use specific C and C++ compilers. Set-
+ting the environment in this way will only change  the  compilers
+the first time CMake is run for a specific build tree. Do not at-
+tempt to change the compiler of an existing build  tree.  Instead
+one  should create a separate build tree for each desired compil-
+er.
+
+The ccmake tool is a curses-based dialog that may be used to  in-
+teractively  configure this project. When it appears press 'c' on
+the keyboard to run the initial configuration of the  build  sys-
+tem. Eventually a set of configuration options will appear. These
+may be edited using the arrow-keys and the ENTER key for  naviga-
+tion.  See  below for details on the meaning of each of these op-
+tions.
+
+Once the options have been set as desired press 'c' again to  re-
+configure.  New  options  may appear when earlier options are ad-
+justed. Keep adjusting options and pressing 'c' until the desired
+configuration  is reached. Finally press 'g' to actually generate
+the build system. Now that the build system  has  been  generated
+just run make to build the project.
+
+NOTE: The ccmake curses dialog is the most commonly used interac-
+tive interface for CMake on UNIX-like  platforms,  so  these  in-
+structions  assume  it  is available.  Some system administrators
+may not have installed curses in which case ccmake  will  not  be
+available.  On these platforms one may use the command "cmake -i"
+in place of ccmake and follow the on-screen instructions to  con-
+figure the build. A last resort is to use the command-line inter-
+face to cmake. See the CMake documentation for further details.
+
+* Windows
+
+Run the CMakeSetup dialog to get started.  It  must  be  executed
+from an environment configured to run the compiler to be used. In
+the case of the Visual Studio IDE no special environment is need-
+ed  and CMakeSetup can be started from its icon. In the case of a
+Visual Studio NMake, Borland C++, or MinGW build  the  CMakeSetup
+dialog  should  be executed from a command prompt with the appro-
+priate environment set.
+
+The dialog prompts for the location  of  the  source  and  binary
+trees. There may also be prompt for the build system generator to
+be used ("Build For:"). Once these are set then  CMake  is  ready
+for a first pass at configuring the project build system. Use the
+"Configure" button to initiate this process. If there was no ear-
+lier prompt for the build system generator a separate dialog will
+appear during the first configuration step to prompt for  genera-
+tor  selection.  After  a  while the dialog will present a set of
+configuration options. See below for details on  the  meaning  of
+each of these options. After setting the options as desired press
+"Configure"  again  to  make  another  pass  at  configuring  the
+project.  New options may appear when earlier options are adjust-
+ed. Keep adjusting options and pressing "Configure" until the de-
+sired configuration is reached. Finally press the "Generate" but-
+ton to actually generate the build system.
+
+Now that the build system has been  generated  the  corresponding
+native  tools  can  be used to build this project. In the case of
+the Visual Studio IDE simply run it and load the workspace or so-
+lution file from the binary tree specified in the CMakeSetup dia-
+log. Select and build the ALL_BUILD target. In the case of a  Vi-
+sual  Studio  NMake,  Borland  C++, or MinGW build use the corre-
+sponding make tool (nmake, make, and make, respectively) from the
+command line.
+
+CONFIGURATION OPTIONS IN CMAKE
+
+* CMAKE_BUILD_TYPE
+
+Specifies  the  build type for the project. Possible  values  are
+empty, Debug, Release, RelWithDebInfo and MinSizeRel.
+
+* CMAKE_INSTALL_PREFIX
+
+When  this  project is installed all files are placed in a direc-
+tory structure rooted at the  directory  specified  by  CMAKE_IN-
+STALL_PREFIX.
