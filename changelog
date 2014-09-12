@@ -1,3 +1,9 @@
+starleth-system-monitor-ros (0.1-2) trusty; urgency=low
+
+  * Bugs corrections.
+
+ -- Jerome Maye <jerome.maye@mavt.ethz.ch>  Fri, 12 Sep 2014 13:32:54 +0200
+
 starleth-system-monitor-ros (0.1-1) trusty; urgency=low
 
   * First draft.

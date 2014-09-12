@@ -100,7 +100,7 @@ def get_sys_net(iface, sys):
 
 class NetMonitor():
   def __init__(self, hostname, diag_hostname):
-    self._diag_pub = rospy.Publisher('/diagnostics', DiagnosticArray)
+    self._diag_pub = rospy.Publisher('/diagnostics', DiagnosticArray, queue_size = 100)
     self._mutex = threading.Lock()
     self._net_level_warn = rospy.get_param('~net_level_warn', net_level_warn)
     self._net_capacity = rospy.get_param('~net_capacity', net_capacity)
@@ -232,6 +232,8 @@ class NetMonitor():
 
 if __name__ == '__main__':
   hostname = socket.gethostname()
+  hostname = hostname.replace('-', '_')
+
   import optparse
   parser =\
     optparse.OptionParser(

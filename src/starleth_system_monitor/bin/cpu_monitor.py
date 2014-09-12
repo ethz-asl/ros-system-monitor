@@ -91,7 +91,7 @@ def update_status_stale(stat, last_update_time):
 
 class CPUMonitor():
     def __init__(self, hostname, diag_hostname):
-        self._diag_pub = rospy.Publisher('/diagnostics', DiagnosticArray)
+        self._diag_pub = rospy.Publisher('/diagnostics', DiagnosticArray, queue_size = 100)
 
         self._mutex = threading.Lock()
 
@@ -513,6 +513,7 @@ class CPUMonitor():
 
 if __name__ == '__main__':
     hostname = socket.gethostname()
+    hostname = hostname.replace('-', '_')
 
     import optparse
     parser = optparse.OptionParser(usage="usage: cpu_monitor.py [--diag-hostname=cX]")

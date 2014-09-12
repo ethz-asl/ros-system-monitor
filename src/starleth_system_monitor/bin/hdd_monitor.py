@@ -143,7 +143,7 @@ class hdd_monitor():
         self._hdd_temp_warn = rospy.get_param('~hdd_temp_warn', hdd_temp_warn)
         self._hdd_temp_error = rospy.get_param('~hdd_temp_error', hdd_temp_error)
 
-        self._diag_pub = rospy.Publisher('/diagnostics', DiagnosticArray)
+        self._diag_pub = rospy.Publisher('/diagnostics', DiagnosticArray, queue_size = 100)
 
         self._last_publish_time = 0
 
@@ -348,6 +348,7 @@ class hdd_monitor():
 
 if __name__ == '__main__':
     hostname = socket.gethostname()
+    hostname = hostname.replace('-', '_')
 
     import optparse
     parser = optparse.OptionParser(usage="usage: hdd_monitor.py [--diag-hostname=cX]")
