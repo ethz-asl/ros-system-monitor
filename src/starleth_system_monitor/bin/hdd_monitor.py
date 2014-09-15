@@ -249,11 +249,11 @@ class hdd_monitor():
         diag_message = 'OK'
 
         try:
-            p = subprocess.Popen(["df", "-Ph"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            p = subprocess.Popen(["df", "-Pht", "ext4"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             stdout, stderr = p.communicate()
             retcode = p.returncode
 
-            if (retcode == 0):
+            if (retcode == 0 or retcode == 1):
                 diag_vals.append(KeyValue(key = 'Disk Space Reading', value = 'OK'))
                 rows = stdout.split('\n')
                 del rows[0]
