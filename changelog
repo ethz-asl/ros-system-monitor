@@ -1,3 +1,9 @@
+starleth-system-monitor-ros (0.1-5) trusty; urgency=low
+
+  * adding teamlio
+
+ -- Jerome Maye <jerome.maye@mavt.ethz.ch>  Tue, 16 Sep 2014 12:28:42 +0200
+
 starleth-system-monitor-ros (0.1-4) trusty; urgency=low
 
   * adding teamlio laptop configuration. 
