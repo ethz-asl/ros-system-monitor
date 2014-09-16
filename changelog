@@ -1,3 +1,9 @@
+starleth-system-monitor-ros (0.1-6) trusty; urgency=low
+
+  * porting to PPA. 
+
+ -- Jerome Maye <jerome.maye@mavt.ethz.ch>  Tue, 16 Sep 2014 19:37:48 +0200
+
 starleth-system-monitor-ros (0.1-5) trusty; urgency=low
 
   * adding teamlio
