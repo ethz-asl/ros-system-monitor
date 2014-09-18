@@ -1,3 +1,9 @@
+starleth-system-monitor-ros (0.1-7) trusty; urgency=low
+
+  * modifying configuration for ntp.
+
+ -- Jerome Maye <jerome.maye@mavt.ethz.ch>  Thu, 18 Sep 2014 11:24:52 +0200
+
 starleth-system-monitor-ros (0.1-6) trusty; urgency=low
 
   * porting to PPA. 

@@ -17,7 +17,7 @@ mem_monitor_starleth_hlpc:
   mem_level_warn: 0.95
   mem_level_error: 0.99
 ntp_monitor_starleth_hlpc:
-  reference_host: localhost
+  reference_host: teamlio-HP-EliteBook-8530w
   offset_tolerance: 500.0
   error_offset_tolerance: 5000000.0
 net_monitor_starleth_hlpc:
