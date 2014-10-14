@@ -49,6 +49,7 @@ import sys, os, time
 from time import sleep
 import subprocess
 import string
+import re
 
 import socket
 
@@ -153,7 +154,8 @@ class NetMonitor():
         (retcode, cmd_out) = get_sys_net(ifaces[i], 'operstate')
         if retcode == 0:
           values.append(KeyValue(key = 'State', value = cmd_out))
-          if cmd_out == 'down' or cmd_out == 'dormant':
+          ifacematch = re.match('eth[0-9]+', ifaces[i])
+          if ifacematch and (cmd_out == 'down' or cmd_out == 'dormant'):
             level = DiagnosticStatus.ERROR
         values.append(KeyValue(key = 'Input Traffic',
           value = str(float(kb_in[i]) / 1024) + " (MB/s)"))

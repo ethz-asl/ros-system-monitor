@@ -1,3 +1,9 @@
+starleth-system-monitor-ros (0.1-9) trusty; urgency=medium
+
+  * removing wlan from status 
+
+ -- Jerome Maye <jerome.maye@mavt.ethz.ch>  Tue, 14 Oct 2014 14:27:47 +0200
+
 starleth-system-monitor-ros (0.1-8) trusty; urgency=medium
 
   * adding new computers
