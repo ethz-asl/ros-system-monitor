@@ -1,3 +1,9 @@
+starleth-system-monitor-ros (0.1-8) trusty; urgency=medium
+
+  * adding new computers
+
+ -- Jerome Maye <jerome.maye@mavt.ethz.ch>  Tue, 14 Oct 2014 13:22:34 +0200
+
 starleth-system-monitor-ros (0.1-7) trusty; urgency=low
 
   * modifying configuration for ntp.
