@@ -11,9 +11,10 @@ remake_project(
   AUTHOR "Jerome Maye"
   CONTACT "ralf.kaestner@gmail.com"
   HOME "http://github.com/ethz-asl/ros-system-monitor"
-  LICENSE "GNU Lesser General Public License (LGPL)"
+  LICENSE "BSD License (BSD)"
   PREFIX system-monitor-
   INSTALL /usr
+  README README.md
 )
 
 remake_ros_pack_deb(DEFAULT system_monitor)
