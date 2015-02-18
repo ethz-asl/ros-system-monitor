@@ -23,7 +23,7 @@ remake_ros_distribute_deb(
   DISTRIBUTION lucid
   SECTION libs
   DEPENDS remake pkg-config sysstat hddtemp ntpdate ifstat
-  UPLOAD ppa:jmaye/starleth
+  UPLOAD ppa:kralf/asl
   PASS CMAKE_BUILD_TYPE ROS_${ROS_DISTRIBUTION}_SYSTEM_MONITOR_GIT_REVISION
   FORCE_CONSISTENCY
   IF ${ROS_DISTRIBUTION} STREQUAL fuerte
@@ -32,7 +32,7 @@ remake_ros_distribute_deb(
   DISTRIBUTION precise
   SECTION libs
   DEPENDS remake pkg-config sysstat hddtemp ntpdate ifstat
-  UPLOAD ppa:jmaye/starleth
+  UPLOAD ppa:kralf/asl
   PASS CMAKE_BUILD_TYPE ROS_${ROS_DISTRIBUTION}_SYSTEM_MONITOR_GIT_REVISION
   FORCE_CONSISTENCY
   IF ${ROS_DISTRIBUTION} STREQUAL fuerte OR ${ROS_DISTRIBUTION}
@@ -42,7 +42,7 @@ remake_ros_distribute_deb(
   DISTRIBUTION trusty
   SECTION libs
   DEPENDS remake pkg-config sysstat hddtemp ntpdate ifstat
-  UPLOAD ppa:jmaye/starleth
+  UPLOAD ppa:kralf/asl
   PASS CMAKE_BUILD_TYPE ROS_${ROS_DISTRIBUTION}_SYSTEM_MONITOR_GIT_REVISION
   FORCE_CONSISTENCY
   IF ${ROS_DISTRIBUTION} STREQUAL indigo
