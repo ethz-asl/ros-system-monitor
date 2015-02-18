@@ -1,0 +1,18 @@
+<launch>
+  <arg name="machine_name" default="$(optenv HOSTNAME localhost)"/>
+  <group ns="$(arg machine_name)">
+    <node name="cpu_monitor_$(arg machine_name)" pkg="system_monitor"
+      type="cpu_monitor.py" output="screen" respawn="true"/>
+    <node name="hdd_monitor_$(arg machine_name)" pkg="system_monitor"
+      type="hdd_monitor.py" output="screen" respawn="true"/>
+    <node name="mem_monitor_$(arg machine_name)" pkg="system_monitor"
+      type="mem_monitor.py" output="screen" respawn="true"/>
+    <node name="ntp_monitor_$(arg machine_name)" pkg="system_monitor"
+      type="ntp_monitor.py" output="screen" respawn="true"/>
+    <node name="net_monitor_$(arg machine_name)" pkg="system_monitor"
+      type="net_monitor.py" output="screen" respawn="true"/>
+      
+    <rosparam command="load"
+      file="$(find system_monitor)/config/system_monitor.yaml"/>
+  </group>
+</launch>
