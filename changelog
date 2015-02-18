@@ -1,3 +1,9 @@
+ros-system-monitor (0.1-13) trusty; urgency=medium
+
+  * Fixed ROS package dependencies
+  
+ -- Ralf Kaestner <ralf.kaestner@gmail.com>  Wed, 18 Feb 2015 12:33:00 +0200
+ 
 ros-system-monitor (0.1-12) trusty; urgency=medium
 
   * Changed PPA
