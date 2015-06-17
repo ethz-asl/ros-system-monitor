@@ -1,0 +1,20 @@
+<package>
+  <name>system_monitor</name>
+  <version>0.1.0</version>
+  <description>
+    System monitoring tools for ROS
+  </description>
+  <author>Ralf Kaestner</author>
+  <author>Jerome Maye</author>
+  <maintainer email="ralf.kaestner@gmail.com">Ralf Kaestner</maintainer>
+  <license>GNU Lesser General Public License (LGPL)</license>
+  <url>http://github.com/ethz-asl/ros-system-monitor</url>
+  <buildtool_depend>catkin</buildtool_depend>
+  <run_depend>rospy</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>diagnostic_msgs</run_depend>
+  <run_depend>sysstat</run_depend>
+  <run_depend>hddtemp</run_depend>
+  <run_depend>ntpdate</run_depend>
+  <run_depend>ifstat</run_depend>
+</package>
