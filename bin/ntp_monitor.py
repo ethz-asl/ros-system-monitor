@@ -58,6 +58,7 @@ def ntp_monitor(offset=500, self_offset=500, diag_hostname = None, error_offset 
         diag_hostname = hostname
 
     ntp_hostname = rospy.get_param('~reference_host', 'ntp.ubuntu.com')
+    rospy.logerr(ntp_hostname)
     offset = rospy.get_param('~offset_tolerance', 500)
     error_offset = rospy.get_param('~error_offset_tolerance', 5000000)
 
