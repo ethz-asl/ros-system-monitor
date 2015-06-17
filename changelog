@@ -1,3 +1,9 @@
+ros-system-monitor (0.1-17) trusty; urgency=medium
+
+  * Added config file argument to launch file
+  
+ -- Ralf Kaestner <ralf.kaestner@gmail.com>  Wed, 17 Jun 2015 08:47:00 +0200
+ 
 ros-system-monitor (0.1-16) trusty; urgency=medium
 
   * Logging hddtemp errors to info

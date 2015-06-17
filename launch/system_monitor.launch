@@ -1,5 +1,6 @@
 <launch>
   <arg name="machine_name" default="$(optenv HOSTNAME localhost)"/>
+  <arg name="config_file" default="$(find system_monitor)/config/system_monitor.yaml"/>
   <arg name="output" default="log"/>
 
   <group ns="$(arg machine_name)">
@@ -14,7 +15,6 @@
     <node name="net_monitor_$(arg machine_name)" pkg="system_monitor"
       type="net_monitor.py" output="$(arg output)" respawn="true"/>
       
-    <rosparam command="load"
-      file="$(find system_monitor)/config/system_monitor.yaml"/>
+    <rosparam command="load" file="$(arg config_file)"/>
   </group>
 </launch>
