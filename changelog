@@ -1,98 +1,93 @@
-ros-system-monitor (0.1-15) trusty; urgency=medium
+ros-system-monitor (0.1-15) unstable; urgency=low
 
-  * Fixed bug in net_monitor's check_network() which was caused by an
-    invalid return value after a failure to call ifstat
-  
- -- Ralf Kaestner <ralf.kaestner@gmail.com>  Tue, 21 Jul 2015 10:29:00 +0200
- 
-ros-system-monitor (0.1-14) trusty; urgency=medium
+  * Fixed bug in net_monitor's check_network() which was caused by an invalid
+    return value after a failure to call ifstat
+
+ -- Ralf Kaestner <ralf.kaestner@gmail.com>  Tue, 21 Jul 2015 10:29:56 +0200
+
+ros-system-monitor (0.1-14) unstable; urgency=low
 
   * Catkinization
-  
- -- Ralf Kaestner <ralf.kaestner@gmail.com>  Wed, 17 Jun 2015 07:45:00 +0200
- 
-ros-system-monitor (0.1-13) trusty; urgency=medium
+
+ -- Ralf Kaestner <ralf.kaestner@gmail.com>  Wed, 17 Jun 2015 07:46:27 +0200
+
+ros-system-monitor (0.1-13) unstable; urgency=low
 
   * Fixed ROS package dependencies
-  
- -- Ralf Kaestner <ralf.kaestner@gmail.com>  Wed, 18 Feb 2015 12:33:00 +0200
- 
-ros-system-monitor (0.1-12) trusty; urgency=medium
+
+ -- Ralf Kaestner <ralf.kaestner@gmail.com>  Wed, 18 Feb 2015 12:34:10 +0100
+
+ros-system-monitor (0.1-12) unstable; urgency=low
 
   * Changed PPA
-  
- -- Ralf Kaestner <ralf.kaestner@gmail.com>  Wed, 18 Feb 2015 08:04:00 +0200
- 
-ros-system-monitor (0.1-11) trusty; urgency=medium
+
+ -- Ralf Kaestner <ralf.kaestner@gmail.com>  Wed, 18 Feb 2015 08:05:03 +0100
+
+ros-system-monitor (0.1-11) unstable; urgency=low
 
   * Updated README.md
-  
- -- Ralf Kaestner <ralf.kaestner@gmail.com>  Wed, 18 Feb 2015 08:03:00 +0200
 
-ros-system-monitor (0.1-10) trusty; urgency=medium
+ -- Ralf Kaestner <ralf.kaestner@gmail.com>  Wed, 18 Feb 2015 08:03:35 +0100
+
+ros-system-monitor (0.1-10) unstable; urgency=low
 
   * Fixed project information
   * Removed system-wide ROS configuration file
   * Adapted configuration file path in launch files
+  * removing wlan from status
 
- -- Ralf Kaestner <ralf.kaestner@gmail.com>  Wed, 18 Feb 2015 07:36:00 +0200
+ -- Ralf Kaestner <ralf.kaestner@gmail.com>  Wed, 18 Feb 2015 07:37:06 +0100
 
-ros-system-monitor (0.1-9) trusty; urgency=medium
+ros-system-monitor (0.1-9) unstable; urgency=low
 
-  * removing wlan from status 
+  * removing wlan from status
 
- -- Jerome Maye <jerome.maye@mavt.ethz.ch>  Tue, 14 Oct 2014 14:27:47 +0200
+ -- Jerome Maye <jerome.maye@mavt.ethz.ch>  Tue, 14 Oct 2014 14:28:23 +0200
 
-ros-system-monitor (0.1-9) trusty; urgency=medium
-
-  * removing wlan from status 
-
- -- Jerome Maye <jerome.maye@mavt.ethz.ch>  Tue, 14 Oct 2014 14:27:47 +0200
-
-ros-system-monitor (0.1-8) trusty; urgency=medium
+ros-system-monitor (0.1-8) unstable; urgency=low
 
   * adding new computers
 
- -- Jerome Maye <jerome.maye@mavt.ethz.ch>  Tue, 14 Oct 2014 13:22:34 +0200
+ -- Jerome Maye <jerome.maye@mavt.ethz.ch>  Tue, 14 Oct 2014 13:23:07 +0200
 
-ros-system-monitor (0.1-7) trusty; urgency=low
+ros-system-monitor (0.1-7) unstable; urgency=low
 
   * modifying configuration for ntp.
 
- -- Jerome Maye <jerome.maye@mavt.ethz.ch>  Thu, 18 Sep 2014 11:24:52 +0200
+ -- Jerome Maye <jerome.maye@mavt.ethz.ch>  Thu, 18 Sep 2014 11:25:29 +0200
 
-ros-system-monitor (0.1-6) trusty; urgency=low
+ros-system-monitor (0.1-6) unstable; urgency=low
 
-  * porting to PPA. 
+  * porting to PPA.
 
- -- Jerome Maye <jerome.maye@mavt.ethz.ch>  Tue, 16 Sep 2014 19:37:48 +0200
+ -- Jerome Maye <jerome.maye@mavt.ethz.ch>  Tue, 16 Sep 2014 19:38:14 +0200
 
-ros-system-monitor (0.1-5) trusty; urgency=low
+ros-system-monitor (0.1-5) unstable; urgency=low
 
   * adding teamlio
 
- -- Jerome Maye <jerome.maye@mavt.ethz.ch>  Tue, 16 Sep 2014 12:28:42 +0200
+ -- Jerome Maye <jerome.maye@mavt.ethz.ch>  Tue, 16 Sep 2014 12:29:14 +0200
 
-ros-system-monitor (0.1-4) trusty; urgency=low
+ros-system-monitor (0.1-4) unstable; urgency=low
 
-  * adding teamlio laptop configuration. 
+  * adding teamlio laptop configuration.
 
- -- Jerome Maye <jerome.maye@mavt.ethz.ch>  Tue, 16 Sep 2014 12:21:22 +0200
+ -- Jerome Maye <jerome.maye@mavt.ethz.ch>  Tue, 16 Sep 2014 12:21:55 +0200
 
-ros-system-monitor (0.1-3) trusty; urgency=low
+ros-system-monitor (0.1-3) unstable; urgency=low
 
-  * hack for hdd monitor because of lightdm permissions. 
+  * hack for hdd monitor because of lightdm permissions.
 
- -- Jerome Maye <jerome.maye@mavt.ethz.ch>  Mon, 15 Sep 2014 21:05:55 +0200
+ -- Jerome Maye <jerome.maye@mavt.ethz.ch>  Mon, 15 Sep 2014 21:06:35 +0200
 
-ros-system-monitor (0.1-2) trusty; urgency=low
+ros-system-monitor (0.1-2) unstable; urgency=low
 
   * Bugs corrections.
 
- -- Jerome Maye <jerome.maye@mavt.ethz.ch>  Fri, 12 Sep 2014 13:32:54 +0200
+ -- Jerome Maye <jerome.maye@mavt.ethz.ch>  Fri, 12 Sep 2014 13:33:23 +0200
 
-ros-system-monitor (0.1-1) trusty; urgency=low
+ros-system-monitor (0.1-1) unstable; urgency=low
 
   * First draft.
 
- -- Jerome Maye <jerome.maye@mavt.ethz.ch>  Fri, 12 Sep 2014 12:44:14 +0200
+ -- Jerome Maye <jerome.maye@mavt.ethz.ch>  Fri, 12 Sep 2014 12:55:02 +0200

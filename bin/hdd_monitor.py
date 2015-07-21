@@ -104,7 +104,7 @@ def get_hddtemp_data(hostname = 'localhost', port = 7634):
 
         return True, drives, makes, temps
     except:
-        rospy.logerr(traceback.format_exc())
+        rospy.loginfo(traceback.format_exc())
         return False, [ 'Exception' ], [ traceback.format_exc() ], [ 0 ]
 
 def update_status_stale(stat, last_update_time):
