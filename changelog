@@ -1,3 +1,10 @@
+ros-system-monitor (0.1-15) trusty; urgency=medium
+
+  * Fixed bug in net_monitor's check_network() which was caused by an
+    invalid return value after a failure to call ifstat
+  
+ -- Ralf Kaestner <ralf.kaestner@gmail.com>  Tue, 21 Jul 2015 10:29:00 +0200
+ 
 ros-system-monitor (0.1-14) trusty; urgency=medium
 
   * Catkinization

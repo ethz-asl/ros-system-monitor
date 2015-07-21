@@ -125,7 +125,7 @@ class NetMonitor():
 
   def check_network(self):
     values = []
-    net_dict = {0: 'OK', 1: 'High Network Usage', 2: 'Network Down'}
+    net_dict = {0: 'OK', 1: 'High Network Usage', 2: 'Network Down', 3: 'Call Error'}
     try:
       p = subprocess.Popen('ifstat -q -S 1 1',
                            stdout = subprocess.PIPE,
@@ -135,7 +135,7 @@ class NetMonitor():
       if retcode != 0:
         values.append(KeyValue(key = "\"ifstat -q -S 1 1\" Call Error",
           value = str(retcode)))
-        return DiagnosticStatus.ERROR, values
+        return DiagnosticStatus.ERROR, net_dict[3], values
       rows = stdout.split('\n')
       data = rows[0].split()
       ifaces = []
