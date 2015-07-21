@@ -1,9 +1,51 @@
-ros-system-monitor (0.1-15) unstable; urgency=low
+ros-system-monitor (0.1-22) unstable; urgency=low
+
+  * Updated changelog
+
+ -- Ralf Kaestner <ralf.kaestner@gmail.com>  Tue, 21 Jul 2015 10:34:00 +0200
+
+ros-system-monitor (0.1-21) unstable; urgency=low
+
+  * Fixed changelog
+
+ -- Ralf Kaestner <ralf.kaestner@gmail.com>  Tue, 21 Jul 2015 10:32:05 +0200
+
+ros-system-monitor (0.1-20) unstable; urgency=low
 
   * Fixed bug in net_monitor's check_network() which was caused by an invalid
     return value after a failure to call ifstat
 
  -- Ralf Kaestner <ralf.kaestner@gmail.com>  Tue, 21 Jul 2015 10:29:56 +0200
+
+ros-system-monitor (0.1-19) unstable; urgency=low
+
+  * Removed debugging output
+
+ -- Ralf Kaestner <ralf.kaestner@gmail.com>  Wed, 17 Jun 2015 09:09:57 +0200
+
+ros-system-monitor (0.1-18) unstable; urgency=low
+
+  * Fixed launch namespaces
+
+ -- Ralf Kaestner <ralf.kaestner@gmail.com>  Wed, 17 Jun 2015 09:08:33 +0200
+
+ros-system-monitor (0.1-17) unstable; urgency=low
+
+  * Added config file argument to launch file
+
+ -- Ralf Kaestner <ralf.kaestner@gmail.com>  Wed, 17 Jun 2015 08:47:41 +0200
+
+ros-system-monitor (0.1-16) unstable; urgency=low
+
+  * Logging hddtemp errors to info
+
+ -- Ralf Kaestner <ralf.kaestner@gmail.com>  Wed, 17 Jun 2015 08:43:50 +0200
+
+ros-system-monitor (0.1-15) unstable; urgency=low
+
+  * Added output argument to launch file
+
+ -- Ralf Kaestner <ralf.kaestner@gmail.com>  Wed, 17 Jun 2015 08:36:26 +0200
 
 ros-system-monitor (0.1-14) unstable; urgency=low
 
