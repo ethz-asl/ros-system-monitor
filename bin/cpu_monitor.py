@@ -191,7 +191,7 @@ class CPUMonitor():
             tmp = stdout.strip()
             if unicode(tmp).isnumeric():
                 temp = float(tmp) / 1000
-                diag_vals.append(KeyValue(key = 'Core %d Temperature' % index, value = str(temp)+"DegC"))
+                diag_vals.append(KeyValue(key = 'Core %d Temperature' % index, value = str(temp)+" DegC"))
 
                 if temp >= self._cpu_temp_warn:
                     diag_level = max(diag_level, DiagnosticStatus.WARN)
@@ -232,7 +232,7 @@ class CPUMonitor():
                     continue
 
                 speed = words[1].strip().split('.')[0] # Conversion to float doesn't work with decimal
-                vals.append(KeyValue(key = 'Core %d Clock Speed' % index, value = speed+"MHz"))
+                vals.append(KeyValue(key = 'Core %d Clock Speed' % index, value = speed+" MHz"))
 
         except Exception, e:
             rospy.logerr(traceback.format_exc())
@@ -262,9 +262,9 @@ class CPUMonitor():
                 return DiagnosticStatus.ERROR, vals
 
             upvals = stdout.split()
-            load1 = float(upvals[-3].rstrip(','))/self._num_cores
-            load5 = float(upvals[-2].rstrip(','))/self._num_cores
-            load15 = float(upvals[-1])/self._num_cores
+            load1 = float(upvals[-3].rstrip(',').replace(',', '.', 1))/self._num_cores
+            load5 = float(upvals[-2].rstrip(',').replace(',', '.', 1))/self._num_cores
+            load15 = float(upvals[-1].replace(',', '.', 1))/self._num_cores
 
             # Give warning if we go over load limit
             if load1 > self._cpu_load1_warn or load5 > self._cpu_load5_warn:
@@ -315,6 +315,7 @@ class CPUMonitor():
             num_cores = 0
             cores_loaded = 0
             for index, row in enumerate(stdout.split('\n')):
+
                 if index < 3:
                     continue
 
@@ -335,9 +336,9 @@ class CPUMonitor():
                 user = lst[3]
                 nice = lst[4]
                 system = lst[5]
-
+                
                 core_level = 0
-                usage = (float(user)+float(nice))*1e-2
+                usage = (float(user.replace(',', '.', 1))+float(nice.replace(',', '.', 1)))*1e-2
                 if usage > 10.0: # wrong reading, use old reading instead
                     rospy.logwarn('Read CPU usage of %f percent. Reverting to previous reading of %f percent'%(usage, self._usage_old))
                     usage = self._usage_old
@@ -356,7 +357,7 @@ class CPUMonitor():
                 vals.append(KeyValue(key = 'Core %s Idle' % cpu_name, value = idle+"%"))
 
                 num_cores += 1
-
+           
             # Warn for high load only if we have <= 2 cores that aren't loaded
             if num_cores - cores_loaded <= 2 and num_cores > 2:
                 mp_level = DiagnosticStatus.WARN

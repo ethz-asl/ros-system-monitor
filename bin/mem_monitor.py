@@ -134,24 +134,39 @@ class MemMonitor():
                 return DiagnosticStatus.ERROR, values
 
             rows = stdout.split('\n')
-            data = rows[1].split()
-            total_mem_physical = data[1]
-            used_mem_physical = data[2]
-            free_mem_physical = data[3]
-            data = rows[2].split()
-            used_mem_wo_buffers = data[2]
-            free_mem_wo_buffers = data[3]
-            data = rows[3].split()
-            total_mem_swap = data[1]
-            used_mem_swap = data[2]
-            free_mem_swap = data[3]
-            data = rows[4].split()
-            total_mem = data[1]
-            used_mem = data[2]
-            free_mem = data[3]
+
+            if (len(rows) == 6):
+                # free command output format for Trusty or older
+                data = rows[1].split()
+                total_mem_physical = data[1]
+                data = rows[2].split()
+                used_mem_physical = data[2]
+                free_mem_physical = data[3]
+                data = rows[3].split()
+                total_mem_swap = data[1]
+                used_mem_swap = data[2]
+                free_mem_swap = data[3]
+                data = rows[4].split()
+                total_mem = data[1]
+                used_mem = data[2]
+                free_mem = data[3]
+            else:
+                # free command output format for Xenial or earlier
+                data = rows[1].split()
+                total_mem_physical = data[1]
+                used_mem_physical = data[2]
+                free_mem_physical = data[3]
+                data = rows[2].split()
+                total_mem_swap = data[1]
+                used_mem_swap = data[2]
+                free_mem_swap = data[3]
+                data = rows[3].split()
+                total_mem = data[1]
+                used_mem = data[2]
+                free_mem = data[3]
 
             level = DiagnosticStatus.OK
-            mem_usage = float(used_mem_wo_buffers)/float(total_mem_physical)
+            mem_usage = float(used_mem_physical)/float(total_mem_physical)
             if (mem_usage < self._mem_level_warn):
                 level = DiagnosticStatus.OK
             elif (mem_usage < self._mem_level_error):
@@ -163,8 +178,6 @@ class MemMonitor():
             values.append(KeyValue(key = 'Total Memory (Physical)', value = total_mem_physical+"M"))
             values.append(KeyValue(key = 'Used Memory (Physical)', value = used_mem_physical+"M"))
             values.append(KeyValue(key = 'Free Memory (Physical)', value = free_mem_physical+"M"))
-            values.append(KeyValue(key = 'Used Memory (Physical w/o Buffers)', value = used_mem_wo_buffers+"M"))
-            values.append(KeyValue(key = 'Free Memory (Physical w/o Buffers)', value = free_mem_wo_buffers+"M"))
             values.append(KeyValue(key = 'Total Memory (Swap)', value = total_mem_swap+"M"))
             values.append(KeyValue(key = 'Used Memory (Swap)', value = used_mem_swap+"M"))
             values.append(KeyValue(key = 'Free Memory (Swap)', value = free_mem_swap+"M"))
