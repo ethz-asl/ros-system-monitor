@@ -122,6 +122,9 @@ class MemMonitor():
 
         mem_dict = { 0: 'OK', 1: 'Low Memory', 2: 'Very Low Memory' }
 
+        used_mem_wo_buffers = None
+        total_mem_physical = None
+
         try:
             p = subprocess.Popen('free -tm',
                                 stdout = subprocess.PIPE,
@@ -129,50 +132,86 @@ class MemMonitor():
             stdout, stderr = p.communicate()
             retcode = p.returncode
 
+            # Example output of 'free -tm':
+            #
+            #              total        used        free      shared  buff/cache   available
+            #Mem:           7879        3673         665         707        3540        3145
+            #Swap:          8086           0        8086
+            #Total:        15966        3673        8752
+            #
+
             if retcode != 0:
                 values.append(KeyValue(key = "\"free -tm\" Call Error", value = str(retcode)))
                 return DiagnosticStatus.ERROR, values
 
-            rows = stdout.split('\n')
-            data = rows[1].split()
-            total_mem_physical = data[1]
-            used_mem_physical = data[2]
-            free_mem_physical = data[3]
-            data = rows[2].split()
-            used_mem_wo_buffers = data[2]
-            free_mem_wo_buffers = data[3]
-            data = rows[3].split()
-            total_mem_swap = data[1]
-            used_mem_swap = data[2]
-            free_mem_swap = data[3]
-            data = rows[4].split()
-            total_mem = data[1]
-            used_mem = data[2]
-            free_mem = data[3]
 
-            level = DiagnosticStatus.OK
-            mem_usage = float(used_mem_wo_buffers)/float(total_mem_physical)
-            if (mem_usage < self._mem_level_warn):
+            # import ipdb; ipdb.set_trace()
+            rows = stdout.split('\n')  # Split up lines
+            split_rows = [row.split() for row in rows]  # Split up in fields
+
+            # Skip the first row, those are the column names
+            # Then index the table by the first column, i.e. Mem and Swap
+            row_dict = {row[0].strip(): row[1:] for row in split_rows[1:] if row}
+
+            try:
+                data = row_dict["Mem:"]
+                total_mem_physical = data[0]
+                used_mem_physical = data[1]
+                free_mem_physical = data[2]
+
+                values.append(KeyValue(key='Total Memory (Physical)', value = total_mem_physical+"M"))
+                values.append(KeyValue(key='Used Memory (Physical)', value=used_mem_physical + "M"))
+                values.append(KeyValue(key='Free Memory (Physical)', value=free_mem_physical + "M"))
+            except KeyError:
+                rospy.logerr("Could not read physical memory statistics")
+
+            try:
+                data = row_dict["Used:"]
+                used_mem_wo_buffers = data[1]
+                free_mem_wo_buffers = data[2]
+
+                values.append(KeyValue(key='Used Memory (Physical w/o Buffers)', value=used_mem_wo_buffers + "M"))
+                values.append(KeyValue(key='Free Memory (Physical w/o Buffers)', value=free_mem_wo_buffers + "M"))
+            except KeyError:
+                rospy.logerr("Could not read used memory")
+
+            try:
+                data = row_dict["Swap:"]
+                total_mem_swap = data[0]
+                used_mem_swap = data[1]
+                free_mem_swap = data[2]
+
+                values.append(KeyValue(key='Total Memory (Swap)', value=total_mem_swap + "M"))
+                values.append(KeyValue(key='Used Memory (Swap)', value=used_mem_swap + "M"))
+                values.append(KeyValue(key='Free Memory (Swap)', value=free_mem_swap + "M"))
+            except KeyError:
+                rospy.logerr("Could not read swap memory statistics")
+
+            try:
+                data = row_dict["Total:"]
+                total_mem = data[0]
+                used_mem = data[1]
+                free_mem = data[2]
+
+                values.append(KeyValue(key='Total Memory', value=total_mem + "M"))
+                values.append(KeyValue(key='Used Memory', value=used_mem + "M"))
+                values.append(KeyValue(key='Free Memory', value=free_mem + "M"))
+            except KeyError:
+                rospy.logerr("Could not read memory totals")
+
+            if used_mem_wo_buffers != None and total_mem_physical != None:
                 level = DiagnosticStatus.OK
-            elif (mem_usage < self._mem_level_error):
-                level = DiagnosticStatus.WARN
-            else:
-                level = DiagnosticStatus.ERROR
+                mem_usage = float(used_mem_wo_buffers)/float(total_mem_physical)
+                if (mem_usage < self._mem_level_warn):
+                    level = DiagnosticStatus.OK
+                elif (mem_usage < self._mem_level_error):
+                    level = DiagnosticStatus.WARN
+                else:
+                    level = DiagnosticStatus.ERROR
 
-            values.append(KeyValue(key = 'Memory Status', value = mem_dict[level]))
-            values.append(KeyValue(key = 'Total Memory (Physical)', value = total_mem_physical+"M"))
-            values.append(KeyValue(key = 'Used Memory (Physical)', value = used_mem_physical+"M"))
-            values.append(KeyValue(key = 'Free Memory (Physical)', value = free_mem_physical+"M"))
-            values.append(KeyValue(key = 'Used Memory (Physical w/o Buffers)', value = used_mem_wo_buffers+"M"))
-            values.append(KeyValue(key = 'Free Memory (Physical w/o Buffers)', value = free_mem_wo_buffers+"M"))
-            values.append(KeyValue(key = 'Total Memory (Swap)', value = total_mem_swap+"M"))
-            values.append(KeyValue(key = 'Used Memory (Swap)', value = used_mem_swap+"M"))
-            values.append(KeyValue(key = 'Free Memory (Swap)', value = free_mem_swap+"M"))
-            values.append(KeyValue(key = 'Total Memory', value = total_mem+"M"))
-            values.append(KeyValue(key = 'Used Memory', value = used_mem+"M"))
-            values.append(KeyValue(key = 'Free Memory', value = free_mem+"M"))
+                values.append(KeyValue(key = 'Memory Status', value = mem_dict[level]))
 
-            msg = mem_dict[level]
+                msg = mem_dict[level]
         except Exception, e:
             rospy.logerr(traceback.format_exc())
             msg = 'Memory Usage Check Error'
