@@ -49,7 +49,6 @@ import sys, os, time
 from time import sleep
 import subprocess
 import string
-
 import socket
 
 from diagnostic_msgs.msg import DiagnosticArray, DiagnosticStatus, KeyValue
@@ -139,19 +138,16 @@ class MemMonitor():
             used_mem_physical = data[2]
             free_mem_physical = data[3]
             data = rows[2].split()
-            used_mem_wo_buffers = data[2]
-            free_mem_wo_buffers = data[3]
-            data = rows[3].split()
             total_mem_swap = data[1]
             used_mem_swap = data[2]
             free_mem_swap = data[3]
-            data = rows[4].split()
+            data = rows[3].split()
             total_mem = data[1]
             used_mem = data[2]
             free_mem = data[3]
 
             level = DiagnosticStatus.OK
-            mem_usage = float(used_mem_wo_buffers)/float(total_mem_physical)
+            mem_usage = float(used_mem_physical)/float(total_mem_physical)
             if (mem_usage < self._mem_level_warn):
                 level = DiagnosticStatus.OK
             elif (mem_usage < self._mem_level_error):
@@ -163,8 +159,6 @@ class MemMonitor():
             values.append(KeyValue(key = 'Total Memory (Physical)', value = total_mem_physical+"M"))
             values.append(KeyValue(key = 'Used Memory (Physical)', value = used_mem_physical+"M"))
             values.append(KeyValue(key = 'Free Memory (Physical)', value = free_mem_physical+"M"))
-            values.append(KeyValue(key = 'Used Memory (Physical w/o Buffers)', value = used_mem_wo_buffers+"M"))
-            values.append(KeyValue(key = 'Free Memory (Physical w/o Buffers)', value = free_mem_wo_buffers+"M"))
             values.append(KeyValue(key = 'Total Memory (Swap)', value = total_mem_swap+"M"))
             values.append(KeyValue(key = 'Used Memory (Swap)', value = used_mem_swap+"M"))
             values.append(KeyValue(key = 'Free Memory (Swap)', value = free_mem_swap+"M"))

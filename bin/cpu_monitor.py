@@ -49,6 +49,7 @@ import sys, os, time
 from time import sleep
 import subprocess
 import string
+import multiprocessing
 
 import socket
 
@@ -104,7 +105,7 @@ class CPUMonitor():
         self._cpu_temp_warn = rospy.get_param('~cpu_temp_warn', cpu_temp_warn)
         self._cpu_temp_error = rospy.get_param('~cpu_temp_error', cpu_temp_error)
 
-        self._num_cores = rospy.get_param('~num_cores', 0)
+        self._num_cores = multiprocessing.cpu_count()
 
         self._temps_timer = None
         self._usage_timer = None
