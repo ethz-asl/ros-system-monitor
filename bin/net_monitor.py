@@ -100,7 +100,7 @@ def get_sys_net(iface, sys):
   return (p.returncode, stdout.strip())
 
 class NetMonitor():
-  def __init__(self, hostname, diag_hostname):
+  def __init__(self, hostname, diag_hostname, dev_regex):
     self._diag_pub = rospy.Publisher('/diagnostics', DiagnosticArray, queue_size = 100)
     self._mutex = threading.Lock()
     self._net_level_warn = rospy.get_param('~net_level_warn', net_level_warn)
@@ -117,6 +117,7 @@ class NetMonitor():
                                value = 'N/A') ]
     self._last_usage_time = 0
     self._last_publish_time = 0
+    self._dev_regex = dev_regex
     self.check_usage()
 
   def cancel_timers(self):
@@ -154,7 +155,7 @@ class NetMonitor():
         (retcode, cmd_out) = get_sys_net(ifaces[i], 'operstate')
         if retcode == 0:
           values.append(KeyValue(key = 'State', value = cmd_out))
-          ifacematch = re.match('eth[0-9]+', ifaces[i])
+          ifacematch = re.match(self._dev_regex, ifaces[i])
           if ifacematch and (cmd_out == 'down' or cmd_out == 'dormant'):
             level = DiagnosticStatus.ERROR
         values.append(KeyValue(key = 'Input Traffic',
@@ -239,11 +240,15 @@ if __name__ == '__main__':
   import optparse
   parser =\
     optparse.OptionParser(
-    usage="usage: net_monitor.py [--diag-hostname=cX]")
+      usage="usage: net_monitor.py [--diag-hostname=cX] [--dev-regex=ethX]")
   parser.add_option("--diag-hostname", dest="diag_hostname",
                     help="Computer name in diagnostics output (ex: 'c1')",
                     metavar="DIAG_HOSTNAME",
                     action="store", default = hostname)
+  parser.add_option("--dev-regex", dest="dev_regex",
+                    help="Device regular expression to match (ex: 'eth[1,2]')",
+                    metavar="DEV_REGEX",
+                    action="store", default = 'eth[0-9]+')
   options, args = parser.parse_args(rospy.myargv())
   try:
     rospy.init_node('net_monitor_%s' % hostname)
@@ -251,7 +256,7 @@ if __name__ == '__main__':
     print >> sys.stderr,\
       'Network monitor is unable to initialize node. Master may not be running.'
     sys.exit(0)
-  net_node = NetMonitor(hostname, options.diag_hostname)
+  net_node = NetMonitor(hostname, options.diag_hostname, options.dev_regex)
   rate = rospy.Rate(1.0)
   try:
     while not rospy.is_shutdown():
