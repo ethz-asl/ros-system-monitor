@@ -6,11 +6,11 @@ find_package(catkin REQUIRED)
 catkin_package()
 
 catkin_install_python(PROGRAMS
-  	bin/cpu_monitor.py
-	bin/hdd_monitor.py
-	bin/mem_monitor.py
-	bin/net_monitor.py
-	bin/ntp_monitor.py
+  	scripts/cpu_monitor.py
+	scripts/hdd_monitor.py
+	scripts/mem_monitor.py
+	scripts/net_monitor.py
+	scripts/ntp_monitor.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
